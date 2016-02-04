@@ -61,9 +61,9 @@ pear
 
 ## customizing
 
-You can pass custom named functions during construction. 
+You can pass custom named methods during construction. 
 
-Let's add a function that logs the `id` of each item.
+Let's add a method called `log` that logs the `id` of each item.
 
 ```javascript
 var selections = require('selections')({log: function (d) {console.log(d.id)}})
@@ -88,5 +88,5 @@ apple
 pear
 ```
 
-If one of your custom functions is named `onchange`, it will be called every time the class changes. You might want to use this to manually update styles given the current class.
+If one of your custom methods is named `onchange`, it will be called every time the class changes. You might want to use this to manually update styles given the current class.
 
