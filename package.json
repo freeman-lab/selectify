@@ -1,0 +1,32 @@
+{
+  "name": "selections",
+  "version": "1.0.0",
+  "description": "generic array for manipulating styles and attributes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freeman-lab/selections.git"
+  },
+  "keywords": [
+    "selection",
+    "array",
+    "style",
+    "attribute",
+    "d3",
+    "interface",
+    "ui",
+    "visualization"
+  ],
+  "author": "freeman-lab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freeman-lab/selections/issues"
+  },
+  "homepage": "https://github.com/freeman-lab/selections#readme",
+  "dependencies": {
+    "lodash": "^4.2.1"
+  }
+}
