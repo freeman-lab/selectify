@@ -1,6 +1,6 @@
 # selections
 
-Generic array structure for manipulating styles and attributes. Inspired by the wonderful `selections` from `d3`, but can be used with more generic objects, not just DOM elements! Useful anytime you want to return one or more array of objects for further manipulation. Assumes the selection logic is handled elsewhere, so this module can composed with anything that returns an array. As an example, see it used for manipulating properties of 3D scenes in [`gl-scene`](http://github.com/freeman-lab/gl-scene).
+Generic array for manipulating styles and attributes. Inspired by the wonderful `selections` from `d3`, but can be used with more generic objects, not just DOM elements! Useful anytime you want to return one or more array of objects for further manipulation. Assumes the selection logic is handled elsewhere, so this module can composed with anything that returns an array. As an example, see it used for manipulating properties of 3D scenes in [`gl-scene`](http://github.com/freeman-lab/gl-scene).
 
 ## install
 
@@ -8,6 +8,7 @@ add to your project with
 
 ```javascript
 npm install selections --save
+```
 
 ## example
 
