@@ -1,5 +1,5 @@
 {
-  "name": "selections",
+  "name": "selectify",
   "version": "1.0.0",
   "description": "generic array for manipulating styles and attributes",
   "main": "index.js",
@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/freeman-lab/selections#readme",
   "dependencies": {
+    "class-list": "^0.1.1",
     "lodash": "^4.2.1"
   }
 }

@@ -1,63 +1,84 @@
-# selections
+# selectify
 
-Generic array for manipulating styles and attributes. Inspired by the wonderful `selections` from `d3`, but can be used with more generic objects, not just DOM elements! Useful anytime you want to return one or more objects for further manipulation. Assumes the selection logic is handled elsewhere, so this module can be composed with anything that returns an array. As an example, see it used for manipulating properties of 3D scenes in [`gl-scene`](http://github.com/freeman-lab/gl-scene).
+Generic array for manipulating styles and attributes. Heavily inspired by the wonderful `selections` from `d3`, but works with more generic objects, not just DOM elements! Includes CSS-oriented methods like `style` and `classed`, but custom methods can be added. And the input is just an array, so some initial selection logic can be handled elsewhere, and return this object for further manipulation. As an example, see it used for manipulating properties of 3D scenes in [`gl-scene`](http://github.com/freeman-lab/gl-scene).
 
 ## install
 
 Add to your project with
 
 ```javascript
-npm install selections --save
+npm install selectify --save
 ```
 
 ## example
 
-Define a list of items
+Create a selection from an array
 
 ```javascript
-var selections = require('selections')()
-var items = selections([{id: 'apple', className: 'fruit'}, {id: 'pear', className: 'fruit'}])
+var selectify = require('selectify')()
+var selection = selectify([{id: 'apple', className: 'fruit'}, {id: 'pear', className: 'fruit'}])
 ```
 
-you can set styles directly
+you can now set styles
 
 ```javascript
-items.style('width', '100px')
+selection.style('width', '100px')
 ```
 
-or use functions (where `d` is the item)
+or do it via functions (where `d` is the item)
 
 ```javascript
-items.style('color', function (d) {return (d.id === 'apple') ? 'rgb(255,0,0)' : 'rgb(0,255,0)'})
+selection.style('color', function (d) {return (d.id === 'apple') ? 'rgb(255,0,0)' : 'rgb(0,255,0)'})
 ```
 
-you can also evaluate functions on each item
+you can control classes with `classed` and `toggleClass`
 
 ```javascript
-selections.each(function (d) {
-	console.log(d.id)
-	console.log(d.style)
+items.classed('food meat', true)
+items.classed('red', function (d) {return (d.id === 'apple')})
+items.toggleClass('meat')
+```
+
+and select subsets for easy chaining
+
+```javascript
+items.select('#pear').classed('green', true)
+```
+
+you can evaluate functions on each item
+
+```javascript
+selection.each(function (d) {
+	console.log('id: ' + d.id)
+	console.log('class: ' + d.className)
+	console.log('style: ' + JSON.stringify(d.style))
 })
 ```
 
 which in this example will return
 
 ```javascript
-apple
-{ width: '100px', color: 'rgb(255,0,0)'}
-pear
-{ width: '100px', color: 'rgb(0,255,0)'}
+id: apple
+style: {"width":"100px","color":"rgb(255,0,0)"}
+class: fruit food red
+id: pear
+style: {"width":"100px","color":"rgb(0,255,0)"}
+class: fruit food green
 ````
 
 ## methods
 
-#### `selections.each(function)`
+#### `selection.each(function)`
 
-#### `selections.style(name[,value])`
+#### `selection.style(name[,value])`
 
-#### `selections.classed(name[,value])`
+#### `selection.classed(name[,value])`
 
-#### `selections.toggleClass(name)`
+#### `selection.toggleClass(name)`
+
+#### `selection.select(selector)`
+
+#### `selection.selectAll(selector)`
 
 ## customizing
 
@@ -66,13 +87,13 @@ You can pass custom named methods during construction.
 Let's add a method called `log` that logs the `id` of each item.
 
 ```javascript
-var selections = require('selections')({log: function (d) {console.log(d.id)}})
+var selectify = require('selectify')({log: function (d) {console.log(d.id)}})
 ```
 
 Now define a list of items
 
 ```javascript
-var items = selections([{id: 'apple', className: 'fruit'}, {id: 'pear', className: 'fruit'}])
+var items = selectify([{id: 'apple', className: 'fruit'}, {id: 'pear', className: 'fruit'}])
 ```
 
 If you call
