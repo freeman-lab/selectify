@@ -31,13 +31,13 @@ or do it via functions (where `d` is the item)
 selection.style('color', function (d) {return (d.id === 'apple') ? 'rgb(255,0,0)' : 'rgb(255,255,0)'})
 ```
 
-you can control classes with `classed` and `toggleClass`
+you can also control classes
 
 ```javascript
 selection.classed('fruit', true)
 ```
 
-and select subsets for easy chaining
+and target subsets using chaining
 
 ```javascript
 selection.select('#orange').classed('citrus', true)
@@ -58,10 +58,10 @@ which in this example will return
 ```javascript
 id: apple
 style: {"width":"100px","color":"rgb(255,0,0)"}
-class: fruit food red
-id: pear
-style: {"width":"100px","color":"rgb(0,255,0)"}
-class: fruit food green
+class: fruit food
+id: orange
+style: {"width":"100px","color":"rgb(255,255,0)"}
+class: fruit food citrus
 ````
 
 ## methods
