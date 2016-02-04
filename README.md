@@ -4,7 +4,7 @@ Generic array for manipulating styles and attributes. Inspired by the wonderful 
 
 ## install
 
-add to your project with
+Add to your project with
 
 ```javascript
 npm install selections --save
@@ -12,7 +12,7 @@ npm install selections --save
 
 ## example
 
-define a list of selected items
+Define a list of items
 
 ```javascript
 var selections = require('selections')()
