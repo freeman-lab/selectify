@@ -61,7 +61,7 @@ orange
 
 ## customizing
 
-You can pass custom named functions during construction. Let's say you want a function that logs the id of each item.
+You can pass custom named functions during construction. Let's add a function that logs the `id` of each item.
 
 ```javascript
 var selections = require('selections')({log: function (d) {console.log(d.id)}})
@@ -70,7 +70,7 @@ var selections = require('selections')({log: function (d) {console.log(d.id)}})
 Now define a list of items
 
 ```javascript
-var items = selections({id: 'apple', className: 'fruit'}, {id: 'orange', className: 'fruit'})
+var items = selections([{id: 'apple', className: 'fruit'}, {id: 'orange', className: 'fruit'}])
 ```
 
 If you call

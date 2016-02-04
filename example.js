@@ -6,8 +6,8 @@ var selections = require('./index.js')({
 })
 
 var items = selections([
-  {id: 'apple', className: 'fruit', style: {}}, 
-  {id: 'orange', className: 'fruit', style: {}}
+  {id: 'apple', className: 'fruit'}, 
+  {id: 'orange', className: 'fruit'}
 ])
 
 items.style({width: '100px'})

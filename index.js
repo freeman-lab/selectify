@@ -9,6 +9,11 @@ module.exports = function (custom) {
   })
   return function (items) {
     var array = []
+    if (!_.isArray(items)) items = [items]
+    _.forEach(items, function (item) {
+      if (!item.style) item.style = {}
+      if (!item.attributes) item.attributes = {}
+    })
     array.push.apply(array, items)
     array.__proto__ = Selections.prototype
     return array
