@@ -31,7 +31,7 @@ or use functions (where `d` is the item)
 items.style('color', function (d) {if (d.id === 'apple') {return 'rgb(255,0,0)'}})
 ```
 
-you can also call functions
+you can also evaluate functions on each item
 
 ```javascript
 selections.each(function (d) {
