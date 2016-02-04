@@ -16,7 +16,7 @@ Create a selection from an array
 
 ```javascript
 var selectify = require('selectify')()
-var selection = selectify([{id: 'apple', className: 'fruit'}, {id: 'pear', className: 'fruit'}])
+var selection = selectify([{id: 'apple', className: 'fruit'}, {id: 'orange', className: 'fruit'}])
 ```
 
 you can now set styles
@@ -28,21 +28,19 @@ selection.style('width', '100px')
 or do it via functions (where `d` is the item)
 
 ```javascript
-selection.style('color', function (d) {return (d.id === 'apple') ? 'rgb(255,0,0)' : 'rgb(0,255,0)'})
+selection.style('color', function (d) {return (d.id === 'apple') ? 'rgb(255,0,0)' : 'rgb(255,255,0)'})
 ```
 
 you can control classes with `classed` and `toggleClass`
 
 ```javascript
-items.classed('food meat', true)
-items.classed('red', function (d) {return (d.id === 'apple')})
-items.toggleClass('meat')
+selection.classed('fruit', true)
 ```
 
 and select subsets for easy chaining
 
 ```javascript
-items.select('#pear').classed('green', true)
+selection.select('#orange').classed('citrus', true)
 ```
 
 you can evaluate functions on each item
