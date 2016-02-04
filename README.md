@@ -22,13 +22,13 @@ var items = selections({id: 'apple', className: 'fruit'}, {id: 'orange', classNa
 you can set styles directly
 
 ```javascript
-items.style({color: [1, 1, 0]})
+items.style({width: '100px'})
 ```
 
 or use functions (where `d` is the item)
 
 ```javascript
-items.style('color', function (d) {if (d.id === 'apple') {return [1, 0, 0]}})
+items.style('color', function (d) {if (d.id === 'apple') {return 'rgb(255,0,0)'}})
 ```
 
 you can also call functions
