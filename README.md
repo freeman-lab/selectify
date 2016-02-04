@@ -16,7 +16,7 @@ Define a list of items
 
 ```javascript
 var selections = require('selections')()
-var items = selections({id: 'apple', className: 'fruit'}, {id: 'orange', className: 'fruit'})
+var items = selections([{id: 'apple', className: 'fruit'}, {id: 'orange', className: 'fruit'}])
 ```
 
 you can set styles directly
