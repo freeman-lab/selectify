@@ -34,7 +34,7 @@ selection.style('color', function (d) {return (d.id === 'apple') ? 'rgb(255,0,0)
 you can also control classes
 
 ```javascript
-selection.classed('fruit', true)
+selection.classed('food', true)
 ```
 
 and target subsets using chaining
