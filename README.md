@@ -16,7 +16,7 @@ Define a list of items
 
 ```javascript
 var selections = require('selections')()
-var items = selections([{id: 'apple', className: 'fruit'}, {id: 'orange', className: 'fruit'}])
+var items = selections([{id: 'apple', className: 'fruit'}, {id: 'pear', className: 'fruit'}])
 ```
 
 you can set styles directly
@@ -28,7 +28,7 @@ items.style('width', '100px')
 or use functions (where `d` is the item)
 
 ```javascript
-items.style('color', function (d) {if (d.id === 'apple') {return 'rgb(255,0,0)'}})
+items.style('color', function (d) {return (d.id === 'apple') ? 'rgb(255,0,0)' : 'rgb(0,255,0)'})
 ```
 
 you can also evaluate functions on each item
@@ -44,9 +44,9 @@ which in this example will return
 
 ```javascript
 apple
-{ width: '100px', color: 'rgb(255,0,0)' }
-orange
-{ width: '100px' }
+{ width: '100px', color: 'rgb(255,0,0)'}
+pear
+{ width: '100px', color: 'rgb(0,255,0)'}
 ````
 
 ## methods
@@ -72,7 +72,7 @@ var selections = require('selections')({log: function (d) {console.log(d.id)}})
 Now define a list of items
 
 ```javascript
-var items = selections([{id: 'apple', className: 'fruit'}, {id: 'orange', className: 'fruit'}])
+var items = selections([{id: 'apple', className: 'fruit'}, {id: 'pear', className: 'fruit'}])
 ```
 
 If you call
@@ -85,7 +85,7 @@ You'll see
 
 ```javascript
 apple
-orange
+pear
 ```
 
 If one of your custom functions is named `onchange`, it will be called every time the class changes. You might want to use this to manually update styles given the current class.
