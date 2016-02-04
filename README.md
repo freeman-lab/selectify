@@ -1,6 +1,6 @@
 # selectify
 
-Generic array for manipulating styles and attributes. Heavily inspired by the wonderful `selections` from `d3`, but works with more generic objects, not just DOM elements! Includes CSS-oriented methods like `style` and `classed`, but custom methods can be added. And the input is just an array, so some initial selection logic can be handled elsewhere, and return this object for further manipulation. As an example, see it used for manipulating properties of 3D scenes in [`gl-scene`](http://github.com/freeman-lab/gl-scene).
+Generic array for manipulating styles and attributes. Heavily inspired by the wonderful `selections` from `d3`, but works with more generic objects, not just DOM elements! Includes CSS-oriented methods like `style` and `classed`, but custom methods can be added. And the input is just an array, so initial selection logic can be handled elsewhere, and return this object for further manipulation. As an example, see it used for manipulating properties of 3D scenes in [`gl-scene`](http://github.com/freeman-lab/gl-scene).
 
 ## install
 
