@@ -10,7 +10,7 @@ var items = selections([
   {id: 'orange', className: 'fruit'}
 ])
 
-items.style({width: '100px'})
+items.style('width', '100px')
 items.style('color', function (d) {if (d.id === 'apple') {return 'rgb(255,0,0)'}})
 
 items.log()

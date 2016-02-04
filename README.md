@@ -22,7 +22,7 @@ var items = selections([{id: 'apple', className: 'fruit'}, {id: 'orange', classN
 you can set styles directly
 
 ```javascript
-items.style({width: '100px'})
+items.style('width', '100px')
 ```
 
 or use functions (where `d` is the item)
