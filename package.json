@@ -20,7 +20,9 @@
     "d3",
     "interface",
     "ui",
-    "visualization"
+    "visualization",
+    "array",
+    "css"
   ],
   "author": "freeman-lab",
   "license": "MIT",
