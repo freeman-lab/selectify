@@ -4,7 +4,9 @@
   "description": "generic array for manipulating styles and attributes",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tape": "tape test.js | tap-spec",
+    "test": "standard & npm run tape",
+    "start": "node example.js"
   },
   "repository": {
     "type": "git",
@@ -29,5 +31,9 @@
   "dependencies": {
     "class-list": "^0.1.1",
     "lodash": "^4.2.1"
+  },
+  "devDependencies": {
+    "tap-spec": "^4.1.1",
+    "tape": "^4.4.0"
   }
 }
