@@ -1,12 +1,14 @@
-var selecitify = require('./index.js')()
+var selectify = require('./index.js')
 
-var selection = selecitify([
+var selection = selectify([
   {id: 'apple', className: 'fruit'}, 
   {id: 'orange', className: 'fruit'}
 ])
 
 selection.style('width', '100px')
-selection.style('color', function (d) {return (d.id === 'apple') ? 'rgb(255,0,0)' : 'rgb(255,255,0)'})
+selection.style('color', function (d) {
+	return (d.id === 'apple') ? 'rgb(255,0,0)' : 'rgb(255,255,0)'
+})
 
 selection.classed('food', true)
 

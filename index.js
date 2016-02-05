@@ -1,39 +1,26 @@
 var classlist = require('class-list')
 var _ = require('lodash')
 
-module.exports = function (custom) {
-  _.forEach(_.keys(custom), function (name) {
-    Selectify.prototype[name] = function (args) {
-      if (args) this.each(custom[name](args))
-      this.each(custom[name])
-    }
-  })
-  return function (items) {return new Selectify (items)}
-}
+module.exports = Selectify
 
 function Selectify (items) {
-  var array = []
+  if (!(this instanceof Selectify)) return new Selectify(items)
   if (!_.isArray(items)) items = [items]
   _.forEach(items, function (item) {
     if (!item.style) item.style = {}
     if (!item.attributes) item.attributes = {}
   })
-  array.push.apply(array, items)
-  array.__proto__ = Selectify.prototype
-  return array
+  this.push.apply(this, items)
 }
 
-Selectify.prototype = new Array;
-
-Selectify.prototype.each = function (cb) {
+function each (cb) {
   for (var items = this, i = 0; i < items.length; i++) {
     if (items[i]) cb.call(undefined, items[i])
   }
-
   return this
 }
 
-Selectify.prototype.style = function (name, value) {
+function style (name, value) {
   var add = function (name, value) {return function (d) {
     if (value) d.style[name] = value
     else _.forEach(_.keys(name), function (key) {d.style[key] = name[key]})
@@ -53,7 +40,7 @@ Selectify.prototype.style = function (name, value) {
   return this.each(cb(name, value))
 }
 
-Selectify.prototype.classed = function (name, value) {
+function classed (name, value) {
   var names = name.trim().split(/^|\s+/)
 
   var inspected = []
@@ -85,10 +72,12 @@ Selectify.prototype.classed = function (name, value) {
   var cb = typeof value === 'function'
     ? conditional
     : value ? add : remove
-  return this.each(cb(names))
+  this.each(cb(names))
+  this.each(function (d) {if (d.update)d.update()})
+  return this
 }
 
-Selectify.prototype.toggleClass = function (name) {
+function toggleClass (name) {
   var names = name.trim().split(/^|\s+/)
 
   var cb = function (names) {return function (d) {
@@ -96,25 +85,38 @@ Selectify.prototype.toggleClass = function (name) {
     names.forEach(function (name) {list.toggle(name)})
   }}
 
-  return this.each(cb(names))
+  this.each(cb(names))
+  this.each(function (d) {if (d.update) d.update()})
+  return this
 }
 
-Selectify.prototype.select = function (selector) {
+function select (selector) {
   var items = this
   var subitems
   if (selector[0] === '#') subitems = _.find(items, ['id', selector.replace('#', '')])
   if (selector[0] === '.') subitems = _.find(items, function (d) {
     return classlist(d).contains(selector.replace('.',''))
   })
-  return Selectify(subitems)
+  return new this.constructor(subitems)
 }
 
-Selectify.prototype.selectAll = function (selector) {
+function selectAll (selector) {
   var items = this
   var subitems
   if (selector[0] === '#') subitems = _.filter(items, ['id', selector.replace('#', '')])
   if (selector[0] === '.') subitems = _.filter(items, function (d) {
     return classlist(d).contains(selector.replace('.',''))
   })
-  return Selectify(subitems)
+  return new this.constructor(subitems)
 }
+
+Selectify.prototype = Object.create(Array.prototype, {
+  constructor: {value: Selectify},
+  each: {value: each},
+  select: {value: select},
+  style: {value: style},
+  classed: {value: classed},
+  toggleClass: {value: toggleClass},
+  select: {value: select},
+  selectAll: {value: selectAll}
+})
