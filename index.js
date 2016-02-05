@@ -40,6 +40,26 @@ function style (name, value) {
   return this.each(cb(name, value))
 }
 
+function attr (name, value) {
+  var add = function (name, value) {return function (d) {
+    if (value) d.attributes[name] = value
+    else _.forEach(_.keys(name), function (key) {d.attributes[key] = name[key]})
+  }}
+  var remove = function (name) {return function (d) {
+    delete d.attributes[name]
+  }}
+  var conditional = function (name, value) {return function (d) {
+    var v = value.apply(d, arguments)
+    if (v) d.attributes[name] = v
+    else delete d.attributes[name]
+  }}
+
+  var cb = _.isUndefined(value) 
+    ? ((typeof name === 'object') ? add : remove)
+    : ((typeof value === 'function') ? conditional : add)
+  return this.each(cb(name, value))
+}
+
 function classed (name, value) {
   var names = name.trim().split(/^|\s+/)
 
@@ -115,6 +135,7 @@ Selectify.prototype = Object.create(Array.prototype, {
   each: {value: each},
   select: {value: select},
   style: {value: style},
+  attr: {value: attr},
   classed: {value: classed},
   toggleClass: {value: toggleClass},
   select: {value: select},
