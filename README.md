@@ -24,28 +24,16 @@ var selection = selectify([{id: 'apple', className: 'fruit'}, {id: 'orange', cla
 you can now set styles
 
 ```javascript
-selection.style('width', '100px')
+selection.style({color: 'rgb(255, 0, 0)'})
 ```
 
-or do it via a function (where `d` is the item)
+or classes
 
 ```javascript
-selection.style('color', function (d) {return (d.id === 'apple') ? 'rgb(255,0,0)' : 'rgb(255,255,0)'})
+selection.classed('cirtrus', function (d) {return d.id === 'orange'})
 ```
 
-you can also control classes
-
-```javascript
-selection.classed('food', true)
-```
-
-and target subsets using chaining
-
-```javascript
-selection.select('#orange').classed('citrus', true)
-```
-
-you can evaluate functions on each item
+and evaluate functions
 
 ```javascript
 selection.each(function (d) {
@@ -59,12 +47,14 @@ which in this example will return
 
 ```javascript
 id: apple
-style: {"width":"100px","color":"rgb(255,0,0)"}
-class: fruit food
+style: {"color":"rgb(255, 0, 0)"}
+class: fruit
 id: orange
-style: {"width":"100px","color":"rgb(255,255,0)"}
-class: fruit food citrus
+style: {"color":"rgb(255, 0, 0)"}
+class: fruit citrus
 ````
+
+see below for all included methods, or how to extend with your own!
 
 ## methods
 
@@ -74,11 +64,11 @@ Evaluates a function on each element. The first input to the function will be th
 
 #### `selection.style(name[,value])`
 
-Set a style on each element by updating the `style` property. Can provide either an object `style({name: value})` or two arguments `style(name, value)`. Can also provide a function for `value`, which will be evaluated on each item to determine the property value. If the function returns undefined, the property will be removed.
+Set a style on each element by updating the `style` property. Can provide either a single object argument `selection.style({name: value})` or two arguments `selection.style(name, value)`. Can also provide a function for `value`, which will be evaluated on each item to determine the property value. If the function returns undefined, the property will be removed.
 
 #### `selection.attr(name[,value])`
 
-Set an attribute on each element by updating the `attributes` property. Works identically to `style`.
+Set an attribute on each element by updating the `attributes` property. Otherwise works identically to `style`.
 
 #### `selection.classed(name[,value])`
 
