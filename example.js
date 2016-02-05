@@ -7,7 +7,7 @@ var selection = selectify([
 
 selection.style({color: 'rgb(255, 0, 0)'})
 
-selection.classed('citrus', function (d) {return d.id === 'orange'})
+selection.classed('citrus', function (d) { return d.id === 'orange' })
 
 selection.each(function (d) {
   console.log('id: ' + d.id)
