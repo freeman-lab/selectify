@@ -1,6 +1,6 @@
 # selectify
 
-Generic array for manipulating styles and attributes. Heavily inspired by the wonderful `selections` from `d3`, but works with more generic objects, not just DOM elements! Includes CSS-oriented methods like `style` and `classed`, but custom methods can be added. And the input is just an array, so initial selection logic can be handled elsewhere, and return this object for further manipulation. As an example, see it used for manipulating properties of 3D scenes in [`gl-scene`](http://github.com/freeman-lab/gl-scene).
+Generic array for manipulating styles and attributes. Heavily inspired by the wonderful `selections` from `d3`, but works with more generic objects, not just DOM elements! Includes CSS-oriented methods like `style` and `classed`, but can easily be inherited from in order to add custom methods. And the input is just an array, so initial selection logic can be handled elsewhere, and return this object for further manipulation. As an example, see it used for manipulating properties of 3D scenes in [`gl-scene`](http://github.com/freeman-lab/gl-scene).
 
 ## install
 
@@ -15,7 +15,7 @@ npm install selectify --save
 Create a selection from an array
 
 ```javascript
-var selectify = require('selectify')()
+var selectify = require('selectify')
 var selection = selectify([{id: 'apple', className: 'fruit'}, {id: 'orange', className: 'fruit'}])
 ```
 
@@ -68,44 +68,65 @@ class: fruit food citrus
 
 #### `selection.each(function)`
 
+Evaluates a function on each element. The first input to the function will be the element.
+
 #### `selection.style(name[,value])`
+
+Set a style on each element by updating the `style` property. Can provide either an object `style({name: value})` or two arguments `style(name, value)`. Can also provide a function for `value`, which will be evaluated on each item to determine the property value. If the function returns undefined, the property will be removed.
+
+#### `selection.attr(name[,value])`
+
+Set an attribute on each element by updating the `attributes` property. Works identically to `style`.
 
 #### `selection.classed(name[,value])`
 
+Set one or more classes on each element by updating the `className` property. Can provide a single class in the form `name` or a list of multiple classes specified by spaces in the form `name1 name2 name3`.
+
 #### `selection.toggleClass(name)`
+
+Add one or more classes (if not already present), or remove them (if already present).
 
 #### `selection.select(selector)`
 
+Return a sub selection matching a string specifier of the form `#id` or `.class`. Will return the first element that matches.
+
 #### `selection.selectAll(selector)`
 
-## customizing
+Return a sub selection matching a string specifier of the form `#id` or `.class`. Will return all elements that match.
 
-You can pass custom named methods during construction. 
+## extending
 
-Let's add a method called `log` that logs the `id` of each item.
+You may want to extend `selectify` with your own custom methods. It's easy to do with `inherits`. Here's an example where we add a log method
 
 ```javascript
-var selectify = require('selectify')({log: function (d) {console.log(d.id)}})
+var selectify = require('selectify')
+var inherits = require('inherits')
+
+inherits(myselectify, selectify)
+
+function myselectify (items) {
+  if (!(this instanceof myselectify)) return new myselectify(items)
+  myselectify.super_.call(this, items)
+}
+
+myselectify.prototype.log = function () {
+  return this.each(function (d) {
+    console.log(d.id)
+  })
+}
 ```
 
-Now define a list of items
+If we now create a selection we can use the log method
 
 ```javascript
-var items = selectify([{id: 'apple', className: 'fruit'}, {id: 'pear', className: 'fruit'}])
+var selection = myselectify([{id: 'apple'}, {id: 'orange'}])
+
+selection.log()
 ```
 
-If you call
+to get
 
-```javascript
-items.log()
 ```
-
-You'll see
-
-```javascript
 apple
-pear
+orange
 ```
-
-If one of your custom methods is named `onchange`, it will be called every time the class changes. You might want to use this to manually update styles given the current class.
-
