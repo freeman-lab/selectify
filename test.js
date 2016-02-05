@@ -32,7 +32,7 @@ test('select', function (t) {
 test('each', function (t) {
   var s = selectify([{id: 'a', className: 'x'}, {id: 'b', className: 'x'}])
   var count = 0
-  s.each(function (d) {count++})
+  s.each(function (d) { count++ })
   t.equals(count, 2)
   t.end()
 })

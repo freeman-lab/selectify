@@ -1,6 +1,8 @@
 # selectify
 
-Generic array for manipulating styles and attributes. Heavily inspired by the wonderful `selections` from `d3`, but works with more generic objects, not just DOM elements! Includes CSS-oriented methods like `style` and `classed`, but can easily be inherited from in order to add custom methods. And the input is just an array, so initial selection logic can be handled elsewhere, and return this object for further manipulation. As an example, see it used for manipulating properties of 3D scenes in [`gl-scene`](http://github.com/freeman-lab/gl-scene).
+Generic array for manipulating styles and attributes. Heavily inspired by the wonderful `selections` from `d3`, but works with more generic objects, not just DOM elements! Includes CSS-oriented methods like `style` and `classed`, but can easily be extended to add custom methods. And the input is just an array, so initial selection can be handled elsewhere, and return this object for further manipulation. As an example, see it used for manipulating 3D scenes in [`gl-scene`](http://github.com/freeman-lab/gl-scene).
+
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 ## install
 
@@ -25,7 +27,7 @@ you can now set styles
 selection.style('width', '100px')
 ```
 
-or do it via functions (where `d` is the item)
+or do it via a function (where `d` is the item)
 
 ```javascript
 selection.style('color', function (d) {return (d.id === 'apple') ? 'rgb(255,0,0)' : 'rgb(255,255,0)'})
@@ -80,7 +82,7 @@ Set an attribute on each element by updating the `attributes` property. Works id
 
 #### `selection.classed(name[,value])`
 
-Set one or more classes on each element by updating the `className` property. Can provide a single class in the form `name` or a list of multiple classes specified by spaces in the form `name1 name2 name3`.
+Set one or more classes on each element by updating the `className` property. Can provide a single class in the form `name` or a list of multiple classes specified by spaces in the form `name1 name2 name3`. If `value` is truthy it will determine whether to add or remove the class. If not provided, it will return a list of whether or not each element of the selection has the specified class.
 
 #### `selection.toggleClass(name)`
 
@@ -96,7 +98,7 @@ Return a sub selection matching a string specifier of the form `#id` or `.class`
 
 ## extending
 
-You may want to extend `selectify` with your own custom methods. It's easy to do with `inherits`. Here's an example where we add a log method
+You may want to extend `selectify` with your own custom methods. It's easy to do with `inherits`. Here's an example. First, the usual boilerplate
 
 ```javascript
 var selectify = require('selectify')
@@ -108,7 +110,11 @@ function myselectify (items) {
   if (!(this instanceof myselectify)) return new myselectify(items)
   myselectify.super_.call(this, items)
 }
+```
 
+Then add a method `log`
+
+```javascript
 myselectify.prototype.log = function () {
   return this.each(function (d) {
     console.log(d.id)
@@ -116,11 +122,10 @@ myselectify.prototype.log = function () {
 }
 ```
 
-If we now create a selection we can use the log method
+If we now create a selection we can use our new method
 
 ```javascript
 var selection = myselectify([{id: 'apple'}, {id: 'orange'}])
-
 selection.log()
 ```
 
