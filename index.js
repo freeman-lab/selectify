@@ -139,12 +139,14 @@ function select (selector) {
   var subitems
   if (selector[0] === '#') {
     subitems = _.find(items, ['id', selector.replace('#', '')])
-  }
-  if (selector[0] === '.') {
+  } else if (selector[0] === '.') {
     subitems = _.find(items, function (d) {
       return classlist(d).contains(selector.replace('.', ''))
     })
+  } else {
+    subitems = _.find(items, ['id', selector])
   }
+  if (!subitems) return null
   return new this.constructor(subitems)
 }
 
@@ -153,12 +155,14 @@ function selectAll (selector) {
   var subitems
   if (selector[0] === '#') {
     subitems = _.filter(items, ['id', selector.replace('#', '')])
-  }
-  if (selector[0] === '.') {
+  } else if (selector[0] === '.') {
     subitems = _.filter(items, function (d) {
       return classlist(d).contains(selector.replace('.', ''))
     })
+  } else {
+    subitems = _.filter(items, ['id', selector])
   }
+  if (subitems.length == 0) return null
   return new this.constructor(subitems)
 }
 

@@ -80,11 +80,11 @@ Add one or more classes (if not already present), or remove them (if already pre
 
 #### `selection.select(selector)`
 
-Return a sub selection matching a string specifier of the form `#id` or `.class`. Will return the first element that matches.
+Return a sub selection matching a string specifier of the form `#id` or `.class`. A string without a tag will be treated as an id. Will return the first element that matches. If no matching items, will return null.
 
 #### `selection.selectAll(selector)`
 
-Return a sub selection matching a string specifier of the form `#id` or `.class`. Will return all elements that match.
+Return a sub selection matching a string specifier of the form `#id` or `.class`. A string without a tag will be treated as an id. Will return all elements that match. If no matching items, will return null.
 
 ## extending
 
