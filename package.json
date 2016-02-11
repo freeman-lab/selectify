@@ -1,6 +1,6 @@
 {
   "name": "selectify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "generic array for manipulating styles and attributes",
   "main": "index.js",
   "scripts": {
