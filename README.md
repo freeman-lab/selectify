@@ -60,7 +60,7 @@ see below for all included methods, or how to extend with your own!
 
 #### `selection.each(function)`
 
-Evaluates a function on each element. The first input to the function will be the element.
+Evaluates a function on each element. The first input to the function will be the element, the second optional input will be the index.
 
 #### `selection.style(name[,value])`
 

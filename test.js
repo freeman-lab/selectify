@@ -37,6 +37,14 @@ test('each', function (t) {
   t.end()
 })
 
+test('each with index', function (t) {
+  var s = selectify([{id: 'a', className: 'x'}, {id: 'b', className: 'x'}])
+  var count = 0
+  s.each(function (d, i) { count = count + i + 1 })
+  t.equals(count, 3)
+  t.end()
+})
+
 test('style', function (t) {
   var s = selectify([{id: 'a', className: 'x'}, {id: 'b', className: 'x'}])
   s.style({prop: 'val'})

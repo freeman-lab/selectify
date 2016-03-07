@@ -15,7 +15,7 @@ function Selectify (items) {
 
 function each (cb) {
   for (var items = this, i = 0; i < items.length; i++) {
-    if (items[i]) cb(items[i])
+    if (items[i]) cb(items[i], i)
   }
   return this
 }
@@ -115,7 +115,7 @@ function classed (name, value) {
     ? conditional
     : value ? add : remove
   this.each(cb(names))
-  this.each(function (d) { if (d.update)d.update() })
+  this.each(function (d) { if (d.update) d.update() })
   return this
 }
 
@@ -162,7 +162,7 @@ function selectAll (selector) {
   } else {
     subitems = _.filter(items, ['id', selector])
   }
-  if (subitems.length == 0) return null
+  if (subitems.length === 0) return null
   return new this.constructor(subitems)
 }
 
